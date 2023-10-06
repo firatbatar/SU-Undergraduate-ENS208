@@ -62,15 +62,14 @@ paths = nx.all_simple_paths(G, source, sink)
 
 # Find the shortest path from 'H' to 'U' using Dijkstra's algorithm
 
-# Mark all nodes as unvisited
-# All nodes have to information: [current_distance, prev_node]
-unvisited = {key: [float('inf'), None] for key in list(sorted(G.nodes))}
-# A dict for storing visited nodes
-visited = dict()
+# All nodes have two informations:
+# [currently_found_shortest_distance, node_that_shortes_distance_came]
+unvisited = {key: [float('inf'), None] for key in list(sorted(G.nodes))}  # Mark all nodes as unvisited
+visited = dict()  # A dict for storing visited nodes
 unvisited[source][0] = 0  # Source node has distance 0
-current = None
+current = None  # The current node that we check its neighbours
 
-# Go over unvisited nodes until sink becomes visited
+# Go over the unvisited nodes until sink becomes visited
 while sink in unvisited:
     # Select the unvisited node with the minimum distance as the current node
     current = min(unvisited, key=lambda x: unvisited[x][0])
@@ -87,13 +86,13 @@ while sink in unvisited:
     visited[current] = unvisited.pop(current)
 
 all_nodes = unvisited | visited  # Combine visited and unvisited nodes
-path_length = all_nodes[sink][0]  # Path length is the distance to sink node
+path_length = all_nodes[sink][0]  # Shortest path length is the distance to sink node
 path = list()
-step = sink
-# Retrace the path to sink
-while step is not None:
-    path.insert(0, step)
-    step = all_nodes[step][1]
+step = sink  # Last step of the path is the sink
+# Retrace the path from sink to source
+while step is not None:  # Step reaches None when it reaches the source
+    path.insert(0, step)   # Add to the beggining of the path to get the path from source to sink
+    step = all_nodes[step][1]  # Change step to previous node from current step
 
 # Print the shortest path and its length
 print("The shortest path from", source, "to", sink, "is: ", path, "with length", path_length)
