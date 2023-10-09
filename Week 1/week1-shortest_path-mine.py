@@ -87,12 +87,13 @@ while sink in unvisited:
 
 all_nodes = unvisited | visited  # Combine visited and unvisited nodes
 path_length = all_nodes[sink][0]  # Shortest path length is the distance to sink node
+
+# Retrace the path from sink to source
 path = list()
 step = sink  # Last step of the path is the sink
-# Retrace the path from sink to source
 while step is not None:  # Step reaches None when it reaches the source
     path.insert(0, step)   # Add to the beggining of the path to get the path from source to sink
     step = all_nodes[step][1]  # Change step to previous node from current step
 
 # Print the shortest path and its length
-print("The shortest path from", source, "to", sink, "is: ", path, "with length", path_length)
+print(f"The shortest path from { source } to { sink } is: { path } with length { path_length }")
