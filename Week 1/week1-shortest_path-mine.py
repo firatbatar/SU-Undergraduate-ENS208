@@ -39,12 +39,12 @@ G.add_weighted_edges_from(our_edges)
 adj = dict(G.adj)
 
 # Draw G (do not show weights on edges)
-pos = nx.spring_layout(G, scale=100.)
-nx.draw_networkx_nodes(G, pos)
-nx.draw_networkx_edges(G, pos)
-nx.draw_networkx_labels(G, pos)
-plt.axis('off')
-plt.show()
+# pos = nx.spring_layout(G, scale=100.)
+# nx.draw_networkx_nodes(G, pos)
+# nx.draw_networkx_edges(G, pos)
+# nx.draw_networkx_labels(G, pos)
+# plt.axis('off')
+# plt.show()
 
 # Specify beginning (source) & final (sink) nodes named Home (H) and University (U), respectively
 source = 'H'
