@@ -22,15 +22,16 @@ def nearest_neighbour(distance_matrix, source, nodes):
     path_length = 0
     unvisited = nodes.copy()
     
-    current = source
-    while len(unvisited) != 0:
-        do = False
+    current = source  # Start from the source node
+    while len(unvisited) != 0:  # Until all nodes are visited
+
+        # Find the nearest neighbour with smallest distance (from current to neighbour)
         nearest_node = min(unvisited, key=lambda x: distance_matrix[current][x])
 
         unvisited.remove(nearest_node)  # Remove from unvisited list
-        path.append(nearest_node)
-        path_length += distance_matrix[current][nearest_node]
-        current = nearest_node
+        path.append(nearest_node)  # Add to the path
+        path_length += distance_matrix[current][nearest_node]  # Add the distance
+        current = nearest_node  # Mark the nearest neighbour as the current
     
     return path, path_length
 
