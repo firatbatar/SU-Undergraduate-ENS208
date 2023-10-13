@@ -45,7 +45,7 @@ nodes = list(range(df.shape[0]))
 # Build distance matrix
 d = [[df[j][i] for j in nodes] for i in nodes]
 
-# source = 0
+# Apply the algorithm for every possible starting node
 for source in nodes:
     distance_matrix_replace(d)
     path, path_length = nearest_neighbour(d, source, nodes)
