@@ -18,10 +18,11 @@ def distance_matrix_replace(matrix):
 
 
 def nearest_neighbour(distance_matrix, source, nodes):
-    path = []
+    path = [source]
     path_length = 0
     unvisited = nodes.copy()
-    
+    unvisited.remove(source)
+
     current = source  # Start from the source node
     while len(unvisited) != 0:  # Until all nodes are visited
 
@@ -49,4 +50,6 @@ d = [[df[j][i] for j in nodes] for i in nodes]
 for source in nodes:
     distance_matrix_replace(d)
     path, path_length = nearest_neighbour(d, source, nodes)
+    path_length += d[path[-1]][source]
+    path.append(source)
     print(path, path_length)
