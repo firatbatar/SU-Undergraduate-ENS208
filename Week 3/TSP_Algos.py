@@ -6,7 +6,6 @@ Function definitions for nearest neighbor, savings, and 2-opt algorithms.
 
 from pqdict import pqdict
 
-# =============================================================================
 def nearest_neighbor(nodes, origin, d):
     '''
     Constructs a TSP solution using the nearest neighbor algorithm, NNH, 
@@ -52,7 +51,6 @@ def nearest_neighbor(nodes, origin, d):
     # Return the resulting tour and its length as a tuple
     return tour, tour_length
 
-# =============================================================================
 def savings(nodes, origin, d):
     '''
     Constructs a TSP solution using the savings method for a given set/list of 
@@ -62,7 +60,7 @@ def savings(nodes, origin, d):
     customers = {i for i in nodes if i != origin}
     
     # Initialize out-and-back tours from the origin to every other node
-    tours = {(i,i): [origin, i, origin] for i in customers}
+    tours = {(i, i): [origin, i, origin] for i in customers}
     
     # Compute savings
     savings = {(i, j): round(d[i][origin] + d[origin][j] - d[i][j], 2) 
@@ -74,26 +72,26 @@ def savings(nodes, origin, d):
     
     # Merge subtours until obtaining a TSP tour
     while len(tours) > 1:
-        i,j = pq.pop()
-        print("\nSelected customer pair:", (i, j))
+        i, j = pq.pop()
+        # print("\nSelected customer pair:", (i, j))
         # Outer loop
         break_outer = False
         for t1 in tours:
-            for t2 in tours.keys()-{t1}:
+            for t2 in tours.keys() - {t1}:
                 if t1[1] == i and t2[0] == j:
-                    print('Merging', tours[t1], 'and', tours[t2])
+                    # print('Merging', tours[t1], 'and', tours[t2])
                     tours[(t1[0], t2[1])] = tours[t1][:-1] + tours[t2][1:]
                     del tours[t1], tours[t2]
-                    print(tours)
+                    # print(tours)
                     break_outer = True
                     break
             if break_outer:
                 break
-        else:
-            print('No merging opportunities can be found for', (i,j)) 
+        # else:
+            # print('No merging opportunities can be found for', (i,j)) 
     
     # Final tours dictionary (involves a single tour, which is the TSP tour)
-    print("\nFinal tour:", tours)
+    # print("\nFinal tour:", tours)
     
     # Compute tour length
     tour_length = 0
@@ -107,7 +105,6 @@ def savings(nodes, origin, d):
     # Return the resulting tour and its length as a tuple
     return tour, tour_length
 
-# =============================================================================
 def two_opt(tour, tour_length, d):
     '''
     Improves a given TSP solution using the 2-opt algorithm. Note: This function
