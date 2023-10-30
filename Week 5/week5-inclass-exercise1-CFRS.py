@@ -119,12 +119,18 @@ clusters = [[2, 3, 10, 11, 15, 20, 28, 29, 31, 35, 37, 38, 39, 40],
 
 
 # NNH
+total = 0
 for i in range(len(clusters)):  
     tour, tour_length = nearest_neighbor(clusters[i], origin, d)
+    total += tour_length
     print(f"For cluster {i+1}, feasible solution found by NNH is {tour} with distance {tour_length}.")
+print(f"Total: {total}")
 
 print()
 # Savings
+total = 0
 for i in range(len(clusters)):  
     tour, tour_length = savings(clusters[i], origin, d)
+    total += tour_length
     print(f"For cluster {i+1}, feasible solution found by Savings is {tour} with distance {tour_length}.")
+print(f"Total: {total}")
